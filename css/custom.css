@@ -40,3 +40,9 @@ form {
 #spinner {
     display: none;
 }
+
+.error {
+  color: red;
+  border: 2px solid red;
+  text-align: center;
+}
