@@ -3,6 +3,7 @@ const $email = document.getElementById("email");
 const $asunto = document.getElementById("asunto");
 const $mensaje = document.getElementById("mensaje");
 const $form = document.getElementById("enviar-mail");
+const regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 enventListeners();
 
@@ -19,16 +20,24 @@ function init() {
 }
 
 function validateForm(e) {
-  e.target.value.length === 0
-    ? (e.target.style.borderBottomColor = "red") &&
-      showErr("Todos los campos son obligatorios")
-    : (e.target.style.borderBottomColor = "green");
+  if (e.target.value.length > 0) {
+    const err = document.querySelector("p.error");
+    if (err) {
+      err.remove();
+    }
+  } else {
+    showErr("Todos los campos son obligatorios");
+  }
 
   if (e.target.type === "email") {
-    const result = e.target.value.indexOf("@");
-    if (result < 0) {
-      showErr("El email no es valido");
+    if (regexp.test(e.target.value)) {
+    } else {
+      showErr("Email no valido");
     }
+  }
+
+  if (regexp.test($email.value) && $asunto.value !== "" && $mensaje.value) {
+    $sendBTN.disabled = false;
   }
 }
 
