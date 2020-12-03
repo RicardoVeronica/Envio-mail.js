@@ -1,2 +1,2 @@
 # Envio-mail.js
-Test formulario validaddo para envio de mails
+Validar formulario para envio de mails
